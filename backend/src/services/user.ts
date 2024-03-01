@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 
 
-export async function getemail(input: string) {
+export async function getemail(input: string) : Promise<string|null>{
   try {
     console.log(input, "mail id ");
     
@@ -49,5 +49,23 @@ export async function getUserpassword(input: string): Promise<string|null> {
     }
   } catch (error) {
     throw new Error("User not found");
+  }
+}
+export async function createuser(input:any): Promise<void>{
+  console.log(input, "details");
+  console.log(input.email, "details");
+  console.log(input.password, "details");
+  try {
+    const user = await prisma.user.create({
+      data: {
+        email: input.email,
+        password: input.password,
+      },
+    });
+
+    console.log(user, "created");
+  } catch (error) {
+    console.error('Error creating user:', error);
+    throw new Error('User creation failed');
   }
 }

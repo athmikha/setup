@@ -8,6 +8,6 @@ const mainRouter=Router();
 
 
 
-mainRouter.use("/login", loginRoute)
+mainRouter.use("/auth", loginRoute)
 
 export default mainRouter;
